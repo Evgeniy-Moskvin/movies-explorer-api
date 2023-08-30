@@ -4,7 +4,7 @@ const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 
 const routes = require('./routes');
-// const { requestLogger, errorLogger } = require('./middlewares/logger');
+ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { serverError } = require('./middlewares/serverError');
 
 const { PORT = 3000 } = process.env;
@@ -23,7 +23,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
 app.use(cookieParser());
 app.use(express.json());
 
+app.use(requestLogger);
+
 app.use(routes);
+
+app.use(errorLogger);
 
 app.use(errors());
 app.use(serverError);
