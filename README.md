@@ -16,7 +16,7 @@
 
 ## Ссылки на проект
 
-IP 84.201.153.216
+IP 158.160.17.236
 
 Frontend https://movie.emoskvin.nomoreparties.co
 
