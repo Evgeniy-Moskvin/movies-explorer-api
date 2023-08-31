@@ -7,10 +7,10 @@ const routes = require('./routes');
  const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { serverError } = require('./middlewares/serverError');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
 const app = express();
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
+mongoose.connect(DB, {
   useNewUrlParser: true,
 })
   .then(() => {
