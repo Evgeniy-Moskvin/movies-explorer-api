@@ -17,6 +17,6 @@
 
 IP 158.160.16.191
 
-Frontend https://movie.emoskvin.nomoreparties.co
+Frontend https://movies.emoskvin.nomoredomainsicu.ru
 
-Backend https://api.movie.emoskvin.nomoreparties.co
+Backend https://api.movies.emoskvin.nomoredomainsicu.ru
