@@ -3,9 +3,10 @@ const BadRequest = require('../errors/BadRequest');
 const NotFound = require('../errors/NotFound');
 const Forbidden = require('../errors/Forbidden');
 const { STATUS_CODE_OK, STATUS_CODE_CREATED } = require('../utils/httpStatusCodes');
+const Conflict = require('../errors/Conflict');
 
 const getMovies = ((req, res, next) => {
-  const owner = req.user._id;
+  const owner = res.user._id;
   return Movie.find({ owner })
     .then((movies) => {
       res.status(STATUS_CODE_OK).send(movies);
@@ -15,12 +16,16 @@ const getMovies = ((req, res, next) => {
 
 const createMovie = ((req, res, next) => {
   const movieData = req.body;
-  movieData.owner = req.user._id;
+  movieData.owner = res.user._id;
   return Movie.create(movieData)
     .then((movie) => {
       res.status(STATUS_CODE_CREATED).send(movie);
     })
     .catch((err) => {
+      if (err.code === 11000) {
+        next(new Conflict(`Фильм с id ${movieData.movieId} уже добавлен!`));
+        return;
+      }
       if (err.name === 'ValidationError') {
         next(new BadRequest('Некорректные данные'));
         return;

@@ -31,12 +31,10 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
 
-app.use(limiter);
 
 app.use(requestLogger);
-
+app.use(limiter);
 app.use(routes);
-
 app.use(errorLogger);
 
 app.use(errors());

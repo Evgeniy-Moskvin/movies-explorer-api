@@ -18,13 +18,17 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     required: true,
 
     validate: {
       validator: ((v) => {
-        validator.isURL(v);
+        return validator.isURL(v);
       }),
       message: 'Некорректная ссылка',
     },
@@ -35,7 +39,7 @@ const cardSchema = new mongoose.Schema({
 
     validate: {
       validator: ((v) => {
-        validator.isURL(v);
+        return validator.isURL(v);
       }),
       message: 'Некорректная ссылка',
     },
@@ -46,7 +50,7 @@ const cardSchema = new mongoose.Schema({
 
     validate: {
       validator: ((v) => {
-        validator.isURL(v);
+        return validator.isURL(v);
       }),
       message: 'Некорректная ссылка',
     },
