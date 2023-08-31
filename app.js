@@ -2,10 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 
 const routes = require('./routes');
- const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { serverError } = require('./middlewares/serverError');
+const { limiter } = require('./utils/rateLimiter');
 
 const { PORT = 3000, DB = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
 const app = express();
@@ -20,8 +22,11 @@ mongoose.connect(DB, {
     console.error('Ошибка подключения к БД!');
   });
 
+app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
+
+app.use(limiter);
 
 app.use(requestLogger);
 
