@@ -23,10 +23,10 @@ mongoose.connect(DB, {
     console.error('Ошибка подключения к БД!');
   });
 
-app.use(cors({
+/*app.use(cors({
   origin: ['http://localhost:3001', 'http://movies.emoskvin.nomoreparties.co', 'https://movies.emoskvin.nomoreparties.co'],
   credentials: true,
-}));
+}));*/
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
