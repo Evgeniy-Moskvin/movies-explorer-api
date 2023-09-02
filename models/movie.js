@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
+const { ERROR_MESSAGE_BAD_URL } = require('../utils/errorMessages');
+
 const cardSchema = new mongoose.Schema({
   country: {
     type: String,
@@ -27,10 +29,8 @@ const cardSchema = new mongoose.Schema({
     required: true,
 
     validate: {
-      validator: ((v) => {
-        return validator.isURL(v);
-      }),
-      message: 'Некорректная ссылка',
+      validator: ((v) => validator.isURL(v)),
+      message: ERROR_MESSAGE_BAD_URL,
     },
   },
   trailerLink: {
@@ -38,10 +38,8 @@ const cardSchema = new mongoose.Schema({
     required: true,
 
     validate: {
-      validator: ((v) => {
-        return validator.isURL(v);
-      }),
-      message: 'Некорректная ссылка',
+      validator: ((v) => validator.isURL(v)),
+      message: ERROR_MESSAGE_BAD_URL,
     },
   },
   thumbnail: {
@@ -49,10 +47,8 @@ const cardSchema = new mongoose.Schema({
     required: true,
 
     validate: {
-      validator: ((v) => {
-        return validator.isURL(v);
-      }),
-      message: 'Некорректная ссылка',
+      validator: ((v) => validator.isURL(v)),
+      message: ERROR_MESSAGE_BAD_URL,
     },
   },
   owner: {
@@ -63,7 +59,6 @@ const cardSchema = new mongoose.Schema({
   movieId: {
     type: Number,
     required: true,
-    unique: true,
   },
   nameRU: {
     type: String,
