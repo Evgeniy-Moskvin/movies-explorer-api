@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
-// const cors = require('cors');
+const cors = require('cors');
 const helmet = require('helmet');
 
 const routes = require('./routes');
@@ -30,10 +30,10 @@ mongoose.connect(DB, {
     console.error(ERROR_MESSAGE_CONNECT_DB);
   });
 
-/* app.use(cors({
-  origin: ['http://localhost:3001', 'http://movies.emoskvin.nomoreparties.co', 'https://movies.emoskvin.nomoreparties.co'],
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://movies.emoskvin.nomoredomainsicu.ru', 'https://movies.emoskvin.nomoredomainsicu.ru'],
   credentials: true,
-})); */
+}));
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
